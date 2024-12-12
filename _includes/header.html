@@ -1,24 +1,18 @@
 <header class="site-header">
-  <h3 class="site-title">
+  <nav class="menu-list">
+    {% assign menu_size = site.data.settings.menu.size | minus: 1 %}
+    {% assign half_size = menu_size | divided_by: 2 %}
+    {% for item in site.data.settings.menu limit: half_size %}
+      <a href="{{ site.github.url }}/{{ item.url }}" class="menu-link">{{ item.name }}</a>
+    {% endfor %}
+  </nav>
+  <h3 class="site-title" style="text-align: center; display: inline-block; width: 100%;">
     <a href="{{ site.github.url }}/">{{ site.title }}</a>
   </h3>
   <nav class="menu-list">
-    {% for item in site.data.settings.menu %}
+    {% for item in site.data.settings.menu offset: half_size %}
       <a href="{{ site.github.url }}/{{ item.url }}" class="menu-link">{{ item.name }}</a>
     {% endfor %}
-    {% for item in site.data.settings.social %}
-      <a href="{{ item.link }}" class="menu-link" target="_blank"><i class="fa fa-{{ item.icon }}" aria-hidden="true"></i></a>
-    {% endfor %}
   </nav>
-  <div class="dropdown">
-    <button class="dropbtn"><i class="fa fa-bars" aria-hidden="true"></i></button>
-    <div class="dropdown-content">
-      {% for item in site.data.settings.menu %}
-        <a href="{{ site.github.url }}/{{ item.url }}" class="menu-link">{{ item.name }}</a>
-      {% endfor %}
-      {% for item in site.data.settings.social %}
-        <a href="{{ item.link }}" class="menu-link" target="_blank"><i class="fa fa-{{ item.icon }}" aria-hidden="true"></i></a>
-      {% endfor %}
-    </div>
-  </div>
+  <div style="clear: both;"></div>
 </header>
